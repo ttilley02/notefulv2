@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Note from '../Note/Note';
+import {Link } from 'react-router-dom'
 
 class NoteListMain extends React.Component {
 
@@ -15,7 +16,7 @@ class NoteListMain extends React.Component {
             )
           })}
         </ul>
-        <button>New Note</button>
+        <Link to='/AddNote'>New Note</Link>
       </div>
     );
   }

@@ -45,7 +45,7 @@ class Note extends React.Component {
     // this is where the App component can remove it from state
     
     cb(id)
-    this.props.onDeleteNote(id)
+    //this.props.onDeleteNote(id)
   })
   .catch(error => {
     console.error(error)
@@ -68,10 +68,8 @@ class Note extends React.Component {
 
             <button
             onClick={()=>{
-            this.DeleteNote(
-              this.props.id,
-              this.context.deleteNotefromPage
-              )
+            this.DeleteNote(this.props.id,this.context.deleteNotefromPage)
+              
             }}
                       
             >Delete Note</button>

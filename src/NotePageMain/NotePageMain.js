@@ -2,6 +2,7 @@ import React from 'react';
 import Note from '../Note/Note';
 import NoteContext from '../NoteContext';
 
+
 class NotePageMain extends React.Component {
   static contextType = NoteContext
 

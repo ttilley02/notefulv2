@@ -7,13 +7,16 @@ import NotePageMain from './NotePageMain/NotePageMain'
 import NotePageNav from './NotePageNav/NotePageNav'
 import { Route, Link } from 'react-router-dom'
 import NoteContext  from './NoteContext'
+import AddNote from './AddNote/AddNote';
+
 
 
 class App extends React.Component {
 
 
-  state = STORE
-
+  state = {STORE,value:''}
+  
+  
   componentDidMount(){
     //fetch request for folders
     fetch('http://localhost:9090/folders')
@@ -36,19 +39,32 @@ class App extends React.Component {
           })
         }
       
-  deleteNotefromPage = id => {
-    console.log("hihihihi")  
+  deleteNotefromPage = id => {  
     const newNoteList = this.state.notes.filter(note =>
       note.id !== id
     )
-   console.log(newNoteList)   
+   
     this.setState({
       notes: newNoteList
     })
   }
 
+  handleChange = (event)=> {
+   
+    this.setState({value: event.target.value});
+    
+  }
 
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const newItem={id:1+Math.random(), name:this.state.value}
+    
+  
+    
+      
+      
+  }
 
   render() {
     const contextValue =  { 
@@ -127,6 +143,21 @@ class App extends React.Component {
               exact
               path='/notes/:noteId'
               component={NotePageMain}
+            />
+              {/* Add Note Route */}
+              <Route
+              exact
+              path='/AddNote'
+              render={() => {
+                return (
+                  <AddNote
+                  handleChange = {this.handleChange}
+                  handleSubmit={this.handleSubmit}
+
+
+                  />
+                )
+              }}
             />
           </main>
         </div>
