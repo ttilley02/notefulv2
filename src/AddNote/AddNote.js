@@ -28,7 +28,7 @@ export default class AddNote extends React.Component{
       }
 
     render(){
-        console.log(this.props.folderList[0].id)
+        
         const folderOptions = Object.keys(this.props.folderList).map((folder, index)=>{
             return(
                 <option key ={index} value={this.props.folderList[folder].name}>
@@ -56,7 +56,7 @@ export default class AddNote extends React.Component{
                 <textarea type="text" className="noteConte__control"
                 name="name" id="name" onChange={this.props.updateAddNoteContent} required/>
             </div>
-            <select id="folderChoice" name="Folder">
+            <select id="folderChoice" name="Folder" onChange ={ e => this.props.folderSelection(e)}>
             <option value="None">Select one...</option>
             {folderOptions}
             </select>

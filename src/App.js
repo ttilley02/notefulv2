@@ -87,6 +87,9 @@ class App extends React.Component {
   }
   handleSubmit = (event) => {
     event.preventDefault();
+    console.log("check me out "+ this.state.notes)
+    // const folderIdresult = this.state.folders.find( ({ name }) => name === this.state.noteFolder.value );
+    // console.log(folderIdresult.id)
     let noteInput =
     {
       "id": '',
@@ -256,8 +259,8 @@ class App extends React.Component {
                   updateAddNoteContent= {this.updateAddNoteContent}
                   errorCheck = {this.state}
                   folderList = {this.state.folders}
-                        
-                    />
+                  folderSelection ={this.folderSelection}   
+                  />
                   )
                 }}
               />
@@ -271,7 +274,7 @@ class App extends React.Component {
                   handleSubmitFolder={this.handleSubmitFolder}
                   validateFolderName ={this.validateFolderName}
                   errorCheck = {this.state}           
-                    />
+                  />
                   )
                 }}
               />
