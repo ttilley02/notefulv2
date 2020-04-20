@@ -7,7 +7,8 @@ import NotePageMain from './NotePageMain/NotePageMain'
 import NotePageNav from './NotePageNav/NotePageNav'
 import { Route, Link } from 'react-router-dom'
 import NoteContext  from './NoteContext'
-import AddNote from './AddNote/AddNote';
+import AddNote from './AddNote/AddNote'
+import AddFolder from './AddFolder/AddFolder'
 
 
 
@@ -78,7 +79,7 @@ class App extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    let testme =
+    let noteInput =
     {
       "id": '',
       "name": this.state.noteName.value,
@@ -86,10 +87,10 @@ class App extends React.Component {
       "folderId": "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1",
       "content": this.state.noteContent.value
     }
-    console.log("Adding note "+ testme.name)
+    console.log("Adding note "+ noteInput.name)
     fetch(`http://localhost:9090/notes/`, {
     method: 'POST',
-    body: JSON.stringify(testme),
+    body: JSON.stringify(noteInput),
     headers: {
       'content-type': 'application/json'
     },
@@ -117,6 +118,43 @@ class App extends React.Component {
  updateAddFolderName = (event)=> {
   this.setState({folderName: {value: event.target.value,touched: true}});
 }
+
+  handleSubmitFolder = (event) => {
+    event.preventDefault();
+    let folderInput =
+    {
+      "id": '',
+      "name": this.state.folderName.value,
+      "modified": "2019-01-03T00:00:00.000Z",
+
+    }
+    console.log("Adding folder "+ folderInput.name)
+    fetch(`http://localhost:9090/folders/`, {
+    method: 'POST',
+    body: JSON.stringify(folderInput),
+    headers: {
+      'content-type': 'application/json'
+    },
+  })
+  .then(res => {
+    if (!res.ok) {
+      // get the error message from the response,
+      return res.json().then(error => {
+        // then throw it
+        throw error
+      })
+    }
+    return res.json()
+  })
+  .then(() => {
+    // call the callback when the request is successful
+    // this is where the App component can remove it from state
+    
+  })
+  .catch(error => {
+    console.error(error)
+  })
+ }  
 
 
 
@@ -208,14 +246,27 @@ class App extends React.Component {
                   updateAddNoteName = {this.updateAddNoteName}
                   handleSubmit={this.handleSubmit}
                   updateAddNoteContent= {this.updateAddNoteContent}
-                  validateNoteName ={this.validateNoteName}
                   errorCheck = {this.state}
                   folderList = {this.state.folders}
                         
-                  />
-                )
-              }}
-            />
+                    />
+                  )
+                }}
+              />
+              <Route
+              exact
+              path='/AddFolder'
+              render={() => {
+                return (
+                  <AddFolder
+                  updateAddFolderName = {this.updateAddFolderName}
+                  handleSubmitFolder={this.handleSubmitFolder}
+                  validateFolderName ={this.validateFolderName}
+                  errorCheck = {this.state}           
+                    />
+                  )
+                }}
+              />
           </main>
         </div>
       </NoteContext.Provider>

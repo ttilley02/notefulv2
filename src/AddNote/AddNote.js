@@ -65,7 +65,7 @@ export default class AddNote extends React.Component{
             {folderOptions}
             </select>
             <button type='submit'>
-              Add Note
+              Submit
             </button>
         </form>
   

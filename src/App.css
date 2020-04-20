@@ -80,3 +80,8 @@
   color: red;
   font-weight: bold;
 }
+
+.addButton{
+  border: solid black 3px;
+  
+}
