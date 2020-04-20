@@ -1,5 +1,6 @@
 import React from 'react'
 import ValidationError from '../ValidationError'
+import '../App.css';
 
 
 
@@ -64,7 +65,7 @@ export default class AddNote extends React.Component{
             <option value="None">Select one...</option>
             {folderOptions}
             </select>
-            <button type='submit'>
+            <button className='addButton' type='submit'>
               Submit
             </button>
         </form>

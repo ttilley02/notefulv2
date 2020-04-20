@@ -1,5 +1,6 @@
 import React from 'react'
 import ValidationError from '../ValidationError'
+import '../App.css';
 
 
 
@@ -33,7 +34,7 @@ export default class AddFolder extends React.Component{
                 <ValidationError message={this.validateFolderName()}/>
                 )}
             </div>
-            <button type='submit'>
+            <button className='addButton' type='submit'>
               Submit
             </button>
         </form>

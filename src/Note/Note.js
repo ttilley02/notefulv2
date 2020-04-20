@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NoteContext from '../NoteContext'
+import '../App.css';
 
 
 // Found this on stack overflow: https://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
