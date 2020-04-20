@@ -14,8 +14,25 @@ import AddNote from './AddNote/AddNote';
 class App extends React.Component {
 
 
-  state = {STORE,value:''}
+  state = {
+    STORE,
+    noteName: {
+        value: '',
+        touched: false
+    },
+    noteContent: {
+      value: '',
+      touched: false
+    },
+    folderName: {
+      value: '',
+      touched: false
+    },
+  }
+    
+
   
+
   
   componentDidMount(){
     //fetch request for folders
@@ -49,22 +66,59 @@ class App extends React.Component {
     })
   }
 
-  handleChange = (event)=> {
-   
-    this.setState({value: event.target.value});
-    
+  updateAddNoteName = (event)=> {
+    this.setState({noteName: {value: event.target.value,touched: true}});
+    console.log(this.state.noteName.value)
   }
 
+  updateAddNoteContent = (event)=> {
+    this.setState({noteContent: {value: event.target.value,touched: true}});
+    console.log(this.state.noteContent.value)
+  }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const newItem={id:1+Math.random(), name:this.state.value}
+    let testme =
+    {
+      "id": '',
+      "name": this.state.noteName.value,
+      "modified": "2019-01-03T00:00:00.000Z",
+      "folderId": "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1",
+      "content": this.state.noteContent.value
+    }
+    console.log("Adding note "+ testme.name)
+    fetch(`http://localhost:9090/notes/`, {
+    method: 'POST',
+    body: JSON.stringify(testme),
+    headers: {
+      'content-type': 'application/json'
+    },
+  })
+  .then(res => {
+    if (!res.ok) {
+      // get the error message from the response,
+      return res.json().then(error => {
+        // then throw it
+        throw error
+      })
+    }
+    return res.json()
+  })
+  .then(() => {
+    // call the callback when the request is successful
+    // this is where the App component can remove it from state
     
-  
-    
-      
-      
-  }
+  })
+  .catch(error => {
+    console.error(error)
+  })
+ }  
+
+ updateAddFolderName = (event)=> {
+  this.setState({folderName: {value: event.target.value,touched: true}});
+}
+
+
 
   render() {
     const contextValue =  { 
@@ -151,10 +205,13 @@ class App extends React.Component {
               render={() => {
                 return (
                   <AddNote
-                  handleChange = {this.handleChange}
+                  updateAddNoteName = {this.updateAddNoteName}
                   handleSubmit={this.handleSubmit}
-
-
+                  updateAddNoteContent= {this.updateAddNoteContent}
+                  validateNoteName ={this.validateNoteName}
+                  errorCheck = {this.state}
+                  folderList = {this.state.folders}
+                        
                   />
                 )
               }}
