@@ -83,13 +83,14 @@ class App extends React.Component {
 
   folderSelection = (event)=> {
     this.setState({noteFolder: {value: event.target.value,touched: true}});
+  
     
   }
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log("check me out "+ this.state.notes)
-    // const folderIdresult = this.state.folders.find( ({ name }) => name === this.state.noteFolder.value );
-    // console.log(folderIdresult.id)
+    
+     const folderIdResult = Object.values(this.state.folders).find(folder => folder.name === this.state.noteFolder.value );
+     console.log(folderIdresult.id)
     let noteInput =
     {
       "id": '',
