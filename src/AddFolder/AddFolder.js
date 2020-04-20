@@ -15,12 +15,7 @@ export default class AddFolder extends React.Component{
         }
       }
 
-
-
-
     render(){
-
-        
 
         return(
         <form className="AddFolder" onSubmit={e => this.props.handleSubmitFolder(e)}>

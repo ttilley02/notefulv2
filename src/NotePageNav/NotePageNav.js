@@ -24,7 +24,7 @@ class NotePageNav extends React.Component {
 
     return (
       <div className="Sidebar">
-        <Link to='/'>Go Back</Link>
+        <Link className='addButton' to='/'>Go Back</Link>
         <h2>Current Folder:  {selectedFolder.name}</h2>
       </div>
     );

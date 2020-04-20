@@ -17,7 +17,6 @@ export default class AddNote extends React.Component{
           }
          ]
         }
-
     
     validateNoteName() {
         const name = this.props.errorCheck.noteName.value.trim();
@@ -27,9 +26,6 @@ export default class AddNote extends React.Component{
           return 'Name must be less than 32 characters long';
         }
       }
-
-
-
 
     render(){
         console.log(this.props.folderList[0].id)
@@ -41,8 +37,7 @@ export default class AddNote extends React.Component{
             )
 
         })
-        
-
+  
         return(
         <form className="AddNote" onSubmit={e => this.props.handleSubmit(e)}>
             <h2>Add Note</h2>

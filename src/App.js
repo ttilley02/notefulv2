@@ -25,6 +25,10 @@ class App extends React.Component {
       value: '',
       touched: false
     },
+    noteFolder: {
+      value: '',
+      touched: false
+    },
     folderName: {
       value: '',
       touched: false
@@ -69,21 +73,25 @@ class App extends React.Component {
 
   updateAddNoteName = (event)=> {
     this.setState({noteName: {value: event.target.value,touched: true}});
-    console.log(this.state.noteName.value)
+   
   }
 
   updateAddNoteContent = (event)=> {
     this.setState({noteContent: {value: event.target.value,touched: true}});
-    console.log(this.state.noteContent.value)
+   
   }
 
+  folderSelection = (event)=> {
+    this.setState({noteFolder: {value: event.target.value,touched: true}});
+    
+  }
   handleSubmit = (event) => {
     event.preventDefault();
     let noteInput =
     {
       "id": '',
       "name": this.state.noteName.value,
-      "modified": "2019-01-03T00:00:00.000Z",
+      "modified": '',
       "folderId": "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1",
       "content": this.state.noteContent.value
     }
@@ -115,9 +123,9 @@ class App extends React.Component {
   })
  }  
 
- updateAddFolderName = (event)=> {
+  updateAddFolderName = (event)=> {
   this.setState({folderName: {value: event.target.value,touched: true}});
-}
+  }
 
   handleSubmitFolder = (event) => {
     event.preventDefault();
@@ -125,7 +133,7 @@ class App extends React.Component {
     {
       "id": '',
       "name": this.state.folderName.value,
-      "modified": "2019-01-03T00:00:00.000Z",
+      "modified": '',
 
     }
     console.log("Adding folder "+ folderInput.name)
