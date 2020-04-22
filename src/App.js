@@ -12,8 +12,9 @@ import AddFolder from './AddFolder/AddFolder'
 
 
 
-class App extends React.Component {
 
+class App extends React.Component {
+  static contextType = NoteContext;
 
   state = {
     STORE,
@@ -62,14 +63,10 @@ class App extends React.Component {
         }
       
   deleteNotefromPage = id => {  
-    const newNoteList = this.state.notes.filter(note =>
-      note.id !== id
-    )
-   
-    this.setState({
-      notes: newNoteList
-    })
-  }
+   this.setState({
+        notes: this.state.notes.filter(note => note.id !== id)
+    });
+  };
 
   updateAddNoteName = (event)=> {
     this.setState({noteName: {value: event.target.value,touched: true}});
@@ -89,14 +86,19 @@ class App extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     
-     const folderIdResult = Object.values(this.state.folders).find(folder => folder.name === this.state.noteFolder.value );
-     console.log(folderIdresult.id)
+     let folderIdResult = Object.values(this.state.folders).find(folder => folder.name === this.state.noteFolder.value )
+     console.log(folderIdResult)
+     const min = 1;
+     const max = 10000;
+     const generatedId = min + Math.random() * (max - min);
+     let newDate = new Date()
+     
     let noteInput =
     {
-      "id": '',
+      "id": generatedId,
       "name": this.state.noteName.value,
-      "modified": '',
-      "folderId": "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1",
+      "modified": newDate,
+      "folderId": folderIdResult.id,
       "content": this.state.noteContent.value
     }
     console.log("Adding note "+ noteInput.name)
@@ -118,14 +120,27 @@ class App extends React.Component {
     return res.json()
   })
   .then(() => {
-    // call the callback when the request is successful
-    // this is where the App component can remove it from state
+    this.setState({
+      noteName: {value: '',touched: false},
+      noteContent: {value: '',touched: false},
+    });
     
   })
   .catch(error => {
     console.error(error)
   })
- }  
+  fetch('http://localhost:9090/notes')
+  .then(response => response.json())
+    .then(data =>{
+      //store response in this.state.folders
+      this.setState({
+        notes : data
+      })
+    })
+  // .then(this.props.history.push('/'))
+  }
+ 
+  
 
   updateAddFolderName = (event)=> {
   this.setState({folderName: {value: event.target.value,touched: true}});
@@ -159,14 +174,23 @@ class App extends React.Component {
     return res.json()
   })
   .then(() => {
-    // call the callback when the request is successful
-    // this is where the App component can remove it from state
+    this.setState({folderName: {value: '',touched: false}});
     
   })
   .catch(error => {
     console.error(error)
   })
- }  
+  fetch('http://localhost:9090/folders')
+  .then(response => response.json())
+    .then(data =>{
+      //store response in this.state.folders
+      this.setState({
+        folders : data
+      })
+    })
+  // .then(this.history.push('/'))
+  }
+   
 
 
 
@@ -264,23 +288,23 @@ class App extends React.Component {
                   />
                   )
                 }}
-              />
-              <Route
-              exact
-              path='/AddFolder'
-              render={() => {
-                return (
-                  <AddFolder
-                  updateAddFolderName = {this.updateAddFolderName}
-                  handleSubmitFolder={this.handleSubmitFolder}
-                  validateFolderName ={this.validateFolderName}
-                  errorCheck = {this.state}           
-                  />
-                  )
-                }}
-              />
-          </main>
-        </div>
+                />
+                <Route
+                exact
+                path='/AddFolder'
+                render={() => {
+                  return (
+                    <AddFolder
+                    updateAddFolderName = {this.updateAddFolderName}
+                    handleSubmitFolder={this.handleSubmitFolder}
+                    validateFolderName ={this.validateFolderName}
+                    errorCheck = {this.state}           
+                    />
+                    )
+                  }}
+                />
+            </main>
+          </div>
       </NoteContext.Provider>
         
     );

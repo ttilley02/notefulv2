@@ -21,9 +21,11 @@ function formatDate(date) {
 }
 
 class Note extends React.Component {
+ 
   static contextType = NoteContext
 
   DeleteNote = (id,cb) =>{
+    
     console.log("Deleting note with the ID "+id)
     fetch(`http://localhost:9090/notes/`+id, {
     method: 'DELETE',
@@ -46,7 +48,7 @@ class Note extends React.Component {
     // this is where the App component can remove it from state
     
     cb(id)
-    //this.props.onDeleteNote(id)
+    
   })
   .catch(error => {
     console.error(error)

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import NoteContext from '../NoteContext'
 
 // This component is rendered in the sidebar for the '/' and 'folder/:folderId' routes
 class NoteListNav extends React.Component {
+  static contextType = NoteContext;
 
   render() {
     return (

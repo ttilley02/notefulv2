@@ -1,6 +1,7 @@
 import React from 'react'
 import ValidationError from '../ValidationError'
 import '../App.css';
+import { Link } from 'react-router-dom'
 
 
 
@@ -39,33 +40,39 @@ export default class AddNote extends React.Component{
         })
   
         return(
-        <form className="AddNote" onSubmit={e => this.props.handleSubmit(e)}>
-            <h2>Add Note</h2>
-            <div className="note__hint"></div>  
-            <div className="form-group">
-                <label htmlFor="name">Name : </label>
-                <input type="text" className="noteName__control"
-                name="name" id="name" onChange={this.props.updateAddNoteName}/>
-                {this.props.errorCheck.noteName.touched && (
-                <ValidationError message={this.validateNoteName()}/>
-                )}
-            </div>
-            <div className="note__hint"></div>  
-            <div className="form-group">
-                <label htmlFor="name">Content: </label>
-                <textarea type="text" className="noteConte__control"
-                name="name" id="name" onChange={this.props.updateAddNoteContent} required/>
-            </div>
-            <select id="folderChoice" name="Folder" onChange ={ e => this.props.folderSelection(e)}>
-            <option value="None">Select one...</option>
-            {folderOptions}
-            </select>
-            <button className='addButton' type='submit'>
+          <div>
+          <form className="AddNote" onSubmit={e => this.props.handleSubmit(e)}>
+              <h2>Add Note</h2>
+              <div className="note__hint"></div>  
+              <div className="form-group">
+                  <label htmlFor="name">Name : </label>
+                  <input type="text" className="noteName__control"
+                  name="name" id="name" value={this.props.errorCheck.noteName.value} onChange={this.props.updateAddNoteName} required/>
+                  {this.props.errorCheck.noteName.touched && (
+                  <ValidationError message={this.validateNoteName()}/>
+                  )}
+              </div>
+              <div className="note__hint"></div>  
+              <div className="form-group">
+                  <label htmlFor="name">Content: </label>
+                  <textarea type="text" className="noteConte__control"
+                  name="name" id="name" value={this.props.errorCheck.noteContent.value} onChange={this.props.updateAddNoteContent} required/>
+              </div>
+              <select id="folderChoice" name="Folder" onChange ={ e => this.props.folderSelection(e)}>
+              <option value="None">Select one...</option>
+              {folderOptions}
+              </select>
+              <button 
+              
+              type='submit' 
+              disabled={this.validateNoteName()}
+              >
               Submit
-            </button>
-        </form>
-  
-        )
+              </button>
+          </form>
+          <Link className='addButton' to='/'>Go Back</Link>
+         </div>
+         )
     }
 
 }

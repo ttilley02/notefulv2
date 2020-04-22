@@ -7,19 +7,17 @@ class NotePageNav extends React.Component {
 
   render() {
 
-    console.log(this.context)
+    
 
-  //find the id of the note that matches the noteId from the url
-  const selectedFolderId = this.context.notes.find(
-    note => note.id === this.props.match.params.noteId
-  ).folderId
+    //find the id of the note that matches the noteId from the url
+    const selectedFolderId = this.context.notes.find(
+      note => note.id === this.props.match.params.noteId
+    ).folderId
 
-  console.log(selectedFolderId)
-  // find the folder with the id that matches 'selectedFolderId'
-  const selectedFolder = this.context.folders.find(
-  folder => folder.id === selectedFolderId
-  )
-
+    // find the folder with the id that matches 'selectedFolderId'
+    const selectedFolder = this.context.folders.find(
+      folder => folder.id === selectedFolderId
+    )
   console.log(selectedFolder)
 
     return (

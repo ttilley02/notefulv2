@@ -2,8 +2,10 @@ import React from 'react';
 
 import Note from '../Note/Note';
 import {Link } from 'react-router-dom'
+import NoteContext from '../NoteContext'
 
 class NoteListMain extends React.Component {
+  static contextType = NoteContext;
 
   render() {
     return (
@@ -12,7 +14,7 @@ class NoteListMain extends React.Component {
         <ul>
           {this.props.notes.map((note) => {
             return (
-              <Note modified={note.modified} key={note.id} id={note.id } name={note.name} />
+              <Note modified={note.modified} key={note.id} id={note.id } name={note.name}  />
             )
           })}
         </ul>

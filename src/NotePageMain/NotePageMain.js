@@ -1,5 +1,6 @@
 import React from 'react';
 import Note from '../Note/Note';
+
 import NoteContext from '../NoteContext';
 
 
@@ -9,6 +10,7 @@ class NotePageMain extends React.Component {
 
   handleDeleteNote = noteId => {
     this.props.history.push(`/`)
+  
   }
 
   render() {
@@ -24,10 +26,9 @@ class NotePageMain extends React.Component {
         <Note  
         id={selectedNote.id} 
         folderId={selectedNote.folderId} 
-        content={selectedNote.content} 
         name={selectedNote.name} 
         modified={selectedNote.modified}
-        onDelete={this.handleDeleteNote}
+        onDeleteNote={this.handleDeleteNote}
         />
         <p>{selectedNote.content}</p>
       </div>
