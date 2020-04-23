@@ -1,40 +1,32 @@
-import React from 'react';
-import Note from '../Note/Note';
-
-import NoteContext from '../NoteContext';
-
+import React from "react";
+import Note from "../Note/Note";
+import NoteContext from "../NoteContext";
 
 class NotePageMain extends React.Component {
-  static contextType = NoteContext
-
+  static contextType = NoteContext;
 
   handleDeleteNote = noteId => {
-    this.props.history.push(`/`)
-  
-  }
+    this.props.history.push(`/`);
+  };
 
   render() {
-   
-    console.log(this.context)
-
-      // Find the note that has the same id from the url (:noteId)
+    // Find the note that has the same id from the url (:noteId)
     const selectedNote = this.context.notes.find(
-    note => note.id === this.props.match.params.noteId
-  )
+      note => note.id === this.props.match.params.noteId
+    );
     return (
       <div className="Main">
-        <Note  
-        id={selectedNote.id} 
-        folderId={selectedNote.folderId} 
-        name={selectedNote.name} 
-        modified={selectedNote.modified}
-        onDeleteNote={this.handleDeleteNote}
+        <Note
+          id={selectedNote.id}
+          folderId={selectedNote.folderId}
+          name={selectedNote.name}
+          modified={selectedNote.modified}
+          onDeleteNote={this.handleDeleteNote}
         />
         <p>{selectedNote.content}</p>
       </div>
     );
   }
-
 }
 
 /*{(props) => {
@@ -48,7 +40,5 @@ class NotePageMain extends React.Component {
     // <NotePageMain id={selectedNote.id} folderId={selectedNote.folderId} content={selectedNote.content} name={selectedNote.name} modified={selectedNote.modified}/>
   )
 }}*/
-
-
 
 export default NotePageMain;
