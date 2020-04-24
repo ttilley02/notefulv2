@@ -88,6 +88,23 @@ class App extends React.Component {
     this.setState({ folderName: { value: "", touched: false } });
   };
 
+  updateFolders = (newFolder) => {
+    this.setState({ folders: { 
+      id: newFolder.id, 
+      name: newFolder.name } 
+    });
+  };
+
+  updateNotes = (newNote) => {
+    this.setState({ notes: {       
+      id: newNote.id,
+      name: newNote.name,
+      modified: newNote.modified,
+      folderId: newNote.folderId,
+      content: newNote.content } 
+    });
+  };
+
   render() {
     const contextValue = {
       notesAndFolderInfo: this.state,
@@ -177,6 +194,8 @@ class App extends React.Component {
                     state={this.state}
                     folderList={this.state.folders}
                     folderSelection={this.folderSelection}
+                    history = {history}
+                    updateNotes={this.updateNotes}
                   />
                 );
               }}
@@ -190,6 +209,8 @@ class App extends React.Component {
                     updateAddFolderName={this.updateAddFolderName}
                     state={this.state}
                     clearFolderName={this.clearFolderName}
+                    history = {history}
+                    updateFolders={this.updateFolders}
                   />
                 );
               }}

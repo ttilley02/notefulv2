@@ -42,6 +42,10 @@ export default class AddFolder extends React.Component {
         this.props.clearFolderName();
         this.props.history.push("/");
       })
+      .then(() => {
+        this.props.updateFolders(folderInput);
+      })
+      
       .catch(error => {
         console.error(error);
       });
