@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
+import Note from "../Note/Note";
+import { Link } from "react-router-dom";
+import NoteContext from "../NoteContext";
 
-import Note from '../Note/Note';
-import {Link } from 'react-router-dom'
-import NoteContext from '../NoteContext'
-
-class NoteListMain extends React.Component {
+export default class NoteListMain extends React.Component {
   static contextType = NoteContext;
 
   render() {
@@ -12,13 +12,20 @@ class NoteListMain extends React.Component {
       <div className="Main">
         <h2>Notes</h2>
         <ul>
-          {this.props.notes.map((note) => {
+          {this.props.notes.map(note => {
             return (
-              <Note modified={note.modified} key={note.id} id={note.id } name={note.name}  />
-            )
+              <Note
+                modified={note.modified}
+                key={note.id}
+                id={note.id}
+                name={note.name}
+              />
+            );
           })}
         </ul>
-        <Link className='addButton' to='/AddNote'>New Note</Link>
+        <Link className="addButton" to="/AddNote">
+          New Note
+        </Link>
       </div>
     );
   }
@@ -26,6 +33,8 @@ class NoteListMain extends React.Component {
 
 NoteListMain.defaultProps = {
   notes: []
-}
+};
 
-export default NoteListMain;
+NoteListMain.propTypes = {
+  notes: PropTypes.object.isRequired
+};

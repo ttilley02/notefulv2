@@ -1,6 +1,7 @@
 import React from "react";
 import ValidationError from "../ValidationError";
 import "../App.css";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 export default class AddFolder extends React.Component {
@@ -39,9 +40,14 @@ export default class AddFolder extends React.Component {
         return res.json();
       })
       .then(() => {
+        this.props.AddFolder(folderInput);
+        console.log(folderInput);
+      })
+      .then(() => {
         this.props.clearFolderName();
         this.props.history.push("/");
       })
+
       .catch(error => {
         console.error(error);
       });
@@ -79,3 +85,9 @@ export default class AddFolder extends React.Component {
     );
   }
 }
+
+AddFolder.propTypes = {
+  updateAddFolderName: PropTypes.func.isRequired,
+  state: PropTypes.object.isRequired,
+  clearFolderName: PropTypes.func.isRequired
+};

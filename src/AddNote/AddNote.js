@@ -2,6 +2,7 @@ import React from "react";
 import ValidationError from "../ValidationError";
 import "../App.css";
 import NoteContext from "../NoteContext";
+import PropTypes from "prop-types";
 
 export default class AddNote extends React.Component {
   static contextType = NoteContext;
@@ -65,6 +66,7 @@ export default class AddNote extends React.Component {
         return res.json();
       })
       .then(() => {
+        this.props.AddNote(noteInput);
         this.props.clearNoteItems();
         this.props.history.push("/");
       })
@@ -133,3 +135,12 @@ export default class AddNote extends React.Component {
     );
   }
 }
+
+AddNote.propTypes = {
+  updateAddNoteName: PropTypes.func.isRequired,
+  updateAddNoteContent: PropTypes.func.isRequired,
+  clearNoteItems: PropTypes.func.isRequired,
+  state: PropTypes.object.isRequired,
+  folderList: PropTypes.object.isRequired,
+  folderSelection: PropTypes.object.isRequired
+};

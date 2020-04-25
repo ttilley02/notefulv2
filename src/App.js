@@ -59,6 +59,14 @@ class App extends React.Component {
     this.setState({ notes: this.state.notes.filter(note => note.id !== id) });
   };
 
+  addFolder = newFolder => {
+    this.setState({ notes: newFolder });
+  };
+
+  addNote = newNote => {
+    this.setState({ notes: newNote });
+  };
+
   updateAddNoteName = event => {
     this.setState({ noteName: { value: event.target.value, touched: true } });
   };
@@ -139,9 +147,9 @@ class App extends React.Component {
             <Route
               exact
               path="/"
-              render={() => (
+              render={({ history }) => (
                 // 'notes' prop will be entire notes array from state
-                <NoteListMain notes={this.state.notes} />
+                <NoteListMain notes={this.state.notes} history={history} />
               )}
             />
             {/* Folder Route */}
@@ -177,6 +185,8 @@ class App extends React.Component {
                     state={this.state}
                     folderList={this.state.folders}
                     folderSelection={this.folderSelection}
+                    addNote={this.addNote}
+                    history={history}
                   />
                 );
               }}
@@ -190,6 +200,8 @@ class App extends React.Component {
                     updateAddFolderName={this.updateAddFolderName}
                     state={this.state}
                     clearFolderName={this.clearFolderName}
+                    addFolder={this.addFolder}
+                    history={history}
                   />
                 );
               }}

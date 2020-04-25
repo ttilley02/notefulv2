@@ -71,8 +71,8 @@
 .Note {
   display: block;
   box-sizing: border-box;
-  padding: .5rem;
-  margin-bottom: .5rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
   border: 1px solid lightgray;
 }
 
@@ -81,8 +81,8 @@
   font-weight: bold;
 }
 
-.addButton{
-  background-color:#282c34;
+.addButton {
+  background-color: #282c34;
   border: none;
   color: white;
   padding: 5px 8px;
@@ -91,3 +91,32 @@
   justify-content: center;
   font-size: 16px;
 }
+
+div {
+  width: 900px;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li img {
+  float: left;
+  margin: 10px;
+  border: 5px solid #fff;
+
+  -webkit-transition: box-shadow 0.5s ease;
+  -moz-transition: box-shadow 0.5s ease;
+  -o-transition: box-shadow 0.5s ease;
+  -ms-transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
+}
+
+li img:hover {
+  -webkit-box-shadow: 0px 0px 7px rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 0px 7px rgba(255, 255, 255, 0.9);
+}
+
+/* https://designshack.net/articles/css/5-simple-and-practical-css-list-styles-you-can-copy-and-paste/ */
